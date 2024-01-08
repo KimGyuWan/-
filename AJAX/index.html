@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>load메서드는 태그형태 그대로 퍼옴 / ajax메서드는 서버의 DB형, xml, json, txt</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div id="gnb">
+    <ul>
+    </ul>
+  </div>
+  <script>
+    $.ajax({
+      type: "GET",
+      url: "/AJAX/data/navi.txt",
+      dataType: "text",
+      success: function (result) {
+        const navidata = result.split("|");
+        console.log(result, navidata, typeof result);
+        let content = "";
+
+        // for (x in navidata) {
+        //   content += `<li>${navidata[x]}</li>`
+        // }
+
+        navidata.map((el) => {
+          content += `<li>${el}</li>`
+        })
+
+        $("#gnb ul").html(content)
+      },
+      error: function (a, b) {
+        console.log(a, b)
+      }
+    })
+  </script>
+</body>
+
+</html>
